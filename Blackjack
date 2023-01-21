@@ -1,0 +1,1322 @@
+import random
+import time
+
+cards = ("A","A", "A", "A", 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, "Jack", "Jack", "Jack", "Jack", "Queen", "Queen", "Queen", "Queen", "King", "King", "King", "King")
+bets = (50, 100, 150, 200,)
+# help ask loop
+while True:
+  decision = input("Do you want instructions on how to play blackjack? ")
+  if decision in ("yes", "Yes", "YES", "no", "No", "NO"):
+    break
+  else:
+    print("Invalid answer")
+if decision == "yes" or decision == "Yes" or decision == "YES":
+  print("Blackjack is a game about getting as close to 21 as possible, at the start of a round you get 2 random cards from the deck, face cards(jacks, queens, kings) are worth 10, cards with numbers are worth the same as their number, and aces are worth 11 or 1 (depending on your total, if an ace being worth 11 puts you over 21 it becomes a 1), after getting your first 2 cards you can decide to either hit, stand, or double down depending on the total you have, hitting will give you another random card from the deck, standing will end your turn, and doubling down will double your bet and give you 1 card then end your turn. If your total goes over 21 you bust and lose. After your turn the other players go through their's (depending on how many other players you choose), and once they are done it is the dealers turn. If the dealer stands and has a total higher than you, you lose, if the dealer stands and you busted you lose, if both you and the dealer bust you lose, and if the dealer bust or you stood higher than the dealer you win. You are not competing with the other players just the dealer. In an example round where you and the dealer bust but every other player stood, everyone else would win except you and the dealer. ")
+else:
+  print(" ")
+playermoney = 1000
+ai1money = 1000
+ai2money = 1000
+ai3money = 1000
+ai4money = 1000
+playerbet = 0
+ai1bet = 0
+ai2bet = 0
+ai3bet = 0
+ai4bet = 0
+#game loop
+while True:
+  decision = input("Type 'continue' when you want to continue to the game ")
+  if decision in ("continue"):
+    break
+  else:
+    print("invalid answer")
+    
+print("Welcome to virtual blackjack")
+# game loop
+while True:
+  playercard1 = 0
+  playercard2 = 0
+  playercard3 = 0
+  playercard4 = 0
+  playercard5 = 0
+  playercard6 = 0
+  playercard7 = 0
+  playercard8 = 0
+  playertotal = 0
+  
+  ai1card1 = 0
+  ai1card2 = 0
+  ai1card3 = 0
+  ai1card4 = 0
+  ai1card5 = 0
+  ai1card6 = 0
+  ai1card7 = 0
+  ai1card8 = 0
+  ai1total = 0
+
+  ai2card1 = 0
+  ai2card2 = 0
+  ai2card3 = 0
+  ai2card4 = 0
+  ai2card5 = 0
+  ai2card6 = 0
+  ai2card7 = 0
+  ai2card8 = 0
+  ai2total = 0
+
+  ai3card1 = 0
+  ai3card2 = 0
+  ai3card3 = 0
+  ai3card4 = 0
+  ai3card5 = 0
+  ai3card6 = 0
+  ai3card7 = 0
+  ai3card8 = 0
+  ai3total = 0
+
+  ai4card1 = 0
+  ai4card2 = 0
+  ai4card3 = 0
+  ai4card4 = 0
+  ai4card5 = 0
+  ai4card6 = 0
+  ai4card7 = 0
+  ai4card8 = 0
+  ai4total = 0
+
+  dealercard1 = 0
+  dealercard2 = 0
+  dealercard3 = 0
+  dealercard4 = 0
+  dealercard5 = 0
+  dealercard6 = 0
+  dealercard7 = 0
+  dealercard8 = 0
+  dealertotal = 0
+
+  hitnumber = 1
+  hitorstand = "yes"
+  
+  while True:
+    numberofplayers = int(input("How many other players do you want? 1 - 4 "))
+    if numberofplayers in (1, 2, 3, 4, ):
+      break
+    print("Invalid answer, please type a number between 1 and 4")
+    
+  print("number of players = " + str(numberofplayers))
+  print("You have " + str(playermoney) + " dollars")
+  while True:
+    playerbet = int(input("How much do you want to bet? "))
+    if playerbet > playermoney or playerbet < 1:
+      print("Invalid answer")
+    else:
+      break
+  print("Your bet is " + str(playerbet) + " dollars")
+  print("dealing cards....")
+
+  playercard1 = random.choice(cards)
+  playercard2 = random.choice(cards)
+
+  print("Your cards are: " + str(playercard1) + ", " + str(playercard2))
+
+  #player turn loop
+  while True:
+    if playercard1 in ("Jack", "Queen", "King", "A"):
+      if playercard1 == "Jack" or playercard1 == "Queen" or playercard1 == "King":
+        playercard1 = 10
+      if playercard1 == "A":
+        if playertotal > 21:
+          playercard1 = 1
+        else:
+          playercard1 = 11
+        
+    if playercard2 in ("Jack", "Queen", "King", "A"):
+      if playercard2 == "Jack" or playercard2 == "Queen" or playercard2 == "King":
+        playercard2 = 10
+      if playercard2 == "A":
+        if playertotal > 21:
+          playercard2 = 1
+        else:
+          playercard2 = 11
+        
+    if playercard3 in ("Jack", "Queen", "King", "A"):
+      if playercard3 == "Jack" or playercard3 == "Queen" or playercard3 == "King":
+        playercard3 = 10
+      if playercard3 == "A":
+        if playertotal > 21:
+          playercard3 = 1
+        else:
+          playercard3 = 11
+        
+    if playercard4 in ("Jack", "Queen", "King", "A"):
+      if playercard4 == "Jack" or playercard4 == "Queen" or playercard4 == "King":
+        playercard4 = 10
+      if playercard4 == "A":
+        if playertotal > 10:
+          playercard4 = 1
+        else:
+          playercard4 = 11
+
+    if playercard5 in ("Jack", "Queen", "King", "A"):
+      if playercard5 == "Jack" or playercard5 == "Queen" or playercard5 == "King":
+        playercard5 = 10
+      if playercard5 == "A":
+        if playertotal > 10:
+          playercard5 = 1
+        else:
+          playercard5 = 11
+    if playercard6 in ("Jack", "Queen", "King", "A"):
+      if playercard6 == "Jack" or playercard6 == "Queen" or playercard6 == "King":
+        playercard6 = 10
+      if playercard6 == "A":
+        if playertotal > 10:
+          playercard6 = 1
+        else:
+          playercard6 = 11
+
+    if playercard7 in ("Jack", "Queen", "King", "A"):
+      if playercard7 == "Jack" or playercard7 == "Queen" or playercard7 == "King":
+        playercard7 = 10
+      if playercard7 == "A":
+        if playertotal > 10:
+          playercard7 = 1
+        else:
+          playercard7 = 11
+    if playercard8 in ("Jack", "Queen", "King", "A"):
+      if playercard8 == "Jack" or playercard8 == "Queen" or playercard8 == "King":
+        playercard8 = 10
+      if playercard8 == "A":
+        if playertotal > 10:
+          playercard8 = 1
+        else:
+          playercard8 = 11
+        
+    playertotal = playercard1 + playercard2 + playercard3 + playercard4 + playercard5 + playercard6 + playercard7 + playercard8
+
+    if playertotal > 21:
+      if playercard1 == 11:
+        playercard1 = 1
+      if playercard2 == 11:
+        playercard2 = 1
+      if playercard3 == 11:
+        playercard3 = 1
+      if playercard4 == 11:
+        playercard4 = 1
+      if playercard5 == 11:
+        playercard5 = 1
+      if playercard6 == 11:
+        playercard6 = 1
+      if playercard7 == 11:
+        playercard7 = 1
+      if playercard8 == 11:
+        playercard8 = 1
+    
+    playertotal = playercard1 + playercard2 + playercard3 + playercard4 + playercard5 + playercard6 + playercard7 + playercard8
+    
+    print("Your total is: " + str(playertotal))
+    
+    if playertotal == 21:
+      print("You have 21")
+      print("Next players turn")
+      print(" ")
+      break
+    if playertotal > 21:
+      print("You bust")
+      print("Next players turn")
+      print(" ")
+      break
+    if hitorstand == "D" or hitorstand == "d":
+      print("Next players turn")
+      print(" ")
+      break
+    while True:
+      hitorstand = input("It's your turn, press H to hit, S to stand, or D to double down ")
+      if hitorstand in ("h", "H", "s", "S", "D", "d"):
+        break
+      else:
+        print("Invalid answer")
+    if hitorstand == "S" or hitorstand == "s":
+      print("Next players turn")
+      print(" ")
+      break
+    if hitorstand == "d" or hitorstand == "D":
+      doubledownbet = playerbet + playerbet
+      if doubledownbet <= playermoney :
+        playerbet = playerbet + playerbet
+        print("You doubled down, your new bet is " + str(playerbet) + " dollars")
+        playercard3 = random.choice(cards)
+        print("Your third card is " + str(playercard3))
+        continue
+      else:
+        print("You don't have enough money to double down, you hit instead")
+        hitorstand = "h"
+    if hitnumber in (1, 2, 3, 4, 5, 6, 7):
+      if hitorstand not in ("H", "h", "S", "s", "D", "d"):
+        print("invalid answer")
+      while True:
+        if hitorstand == "H" or hitorstand == "h":
+          if hitnumber == 1:
+            playercard3 = random.choice(cards)
+            print("Your third card is " + str(playercard3))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 2:
+            playercard4 = random.choice(cards)
+            print("Your fourth card is " + str(playercard4))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 3:
+            playercard5 = random.choice(cards)
+            print("Your fifth card is " + str(playercard5))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 4:
+            playercard6 = random.choice(cards)
+            print("Your sixth card is " + str(playercard6))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 5:
+            playercard7 = random.choice(cards)
+            print("Your seventh card is " + str(playercard7))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 6:
+            playercard8 = random.choice(cards)
+            print("Your eighth card is " + str(playercard8))
+            hitnumber = hitnumber + 1
+            break
+        elif hitorstand == "s" or hitorstand == "S":
+          print("Next players turn")
+          break
+    else:
+      print("Next players turn")
+      print(" ")
+      break
+  #end of player loop
+      
+  ai1card1 = random.choice(cards)
+  ai1card2 = random.choice(cards)
+
+  ai1bet = random.choice(bets)
+  print("AI 1 has " + str(ai1money) + " dollars")
+  if ai1money > 0:
+    print("AI 1 bets " + str(ai1bet))
+    print("AI 1's cards are " + str(ai1card1) +  ", " + str(ai1card2))
+  else:
+    print("AI 1 is dragged from the room as they were playing with money from a loan shark, you hear faint screaming in the distance, AI 1 is never heard from again")
+    break
+  #npc 1 turn loop
+  hitnumber = 1
+  while True:
+    if ai1card1 in ("Jack", "Queen", "King", "A"):
+      if ai1card1 == "Jack" or ai1card1 == "Queen" or ai1card1 == "King":
+        ai1card1 = 10
+      if ai1card1 == "A":
+        if ai1total > 21:
+          ai1card1 = 1
+        else:
+          ai1card1 = 11
+        
+    if ai1card2 in ("Jack", "Queen", "King", "A"):
+      if ai1card2 == "Jack" or ai1card2 == "Queen" or ai1card2 == "King":
+        ai1card2 = 10
+      if ai1card2 == "A":
+        if ai1total > 21:
+          ai1card2 = 1
+        else:
+          ai1card2 = 11
+    
+    if ai1card3 in ("Jack", "Queen", "King", "A"):
+      if ai1card3 == "Jack" or ai1card3 == "Queen" or ai1card3 == "King":
+        ai1card3 = 10
+      if ai1card3 == "A":
+        if ai1total > 21:
+          ai1card3 = 1
+        else:
+          ai1card3 = 11
+        
+    if ai1card4 in ("Jack", "Queen", "King", "A"):
+      if ai1card4 == "Jack" or ai1card4 == "Queen" or ai1card4 == "King":
+        ai1card4 = 10
+      if ai1card4 == "A":
+        if ai1total > 10:
+          ai1card4 = 1
+        else:
+          ai1card4 = 11
+
+    if ai1card5 in ("Jack", "Queen", "King", "A"):
+      if ai1card5 == "Jack" or ai1card5 == "Queen" or ai1card5 == "King":
+        ai1card5 = 10
+      if ai1card5 == "A":
+        if ai1total > 10:
+          ai1card5 = 1
+        else:
+          ai1card5 = 11
+    if ai1card6 in ("Jack", "Queen", "King", "A"):
+      if ai1card6 == "Jack" or ai1card6 == "Queen" or ai1card6 == "King":
+        ai1card6 = 10
+      if ai1card6 == "A":
+        if ai1total > 10:
+          ai1card6 = 1
+        else:
+          ai1card6 = 11
+
+    if ai1card7 in ("Jack", "Queen", "King", "A"):
+      if ai1card7 == "Jack" or ai1card7 == "Queen" or ai1card7 == "King":
+        ai1card7 = 10
+      if ai1card7 == "A":
+        if ai1total > 10:
+          ai1card7 = 1
+        else:
+          ai1card7 = 11
+    if ai1card8 in ("Jack", "Queen", "King", "A"):
+      if ai1card8 == "Jack" or ai1card8 == "Queen" or ai1card8 == "King":
+        ai1card8 = 10
+      if ai1card8 == "A":
+        if ai1total > 10:
+          ai1card8 = 1
+        else:
+          ai1card8 = 11
+          
+    ai1total = ai1card1 + ai1card2 + ai1card3 + ai1card4 + ai1card5 + ai1card6 + ai1card7 + ai1card8
+
+    if ai1total > 21:
+      if ai1card1 == 11:
+        ai1card1 = 1
+      if ai1card2 == 11:
+        ai1card2 = 1
+      if ai1card3 == 11:
+        ai1card3 = 1
+      if ai1card4 == 11:
+        ai1card4 = 1
+      if ai1card5 == 11:
+        ai1card5 = 1
+      if ai1card6 == 11:
+        ai1card6 = 1
+      if ai1card7 == 11:
+        ai1card7 = 1
+      if ai1card8 == 11:
+        ai1card8 = 1
+        
+    ai1total = ai1card1 + ai1card2 + ai1card3 + ai1card4 + ai1card5 + ai1card6 + ai1card7 + ai1card8
+
+    time.sleep(3)
+    print("AI 1's total is: " + str(ai1total))
+
+    if ai1total == 21:
+      print("AI 1 has 21")
+      print("Next players turn")
+      print(" ")
+      break
+    if ai1total > 21:
+      print("AI 1 bust")
+      print("Next players turn")
+      print(" ")
+      break
+    
+    if ai1total > 16:
+      print("AI 1 stands")
+      print("AI 1's total is " + str(ai1total))
+      print("Next players turn")
+      print(" ")
+      break
+    time.sleep(1)
+    if ai1total < 17:
+      hitorstand = "H"
+      print("AI 1 hits")
+
+    while True:
+      if hitorstand == "H" or hitorstand == "h":
+        if hitnumber == 1:
+          ai1card3 = random.choice(cards)
+          time.sleep(1)
+          print("AI 1's third card is " + str(ai1card3))
+          hitnumber = hitnumber + 1
+          break
+        if hitnumber == 2:
+          ai1card4 = random.choice(cards)
+          time.sleep(1)
+          print("AI 1's fourth card is " + str(ai1card4))
+          hitnumber = hitnumber + 1
+          break
+        if hitnumber == 3:
+          ai1card5 = random.choice(cards)
+          time.sleep(1)
+          print("AI 1's fifth card is " + str(ai1card5))
+          hitnumber = hitnumber + 1
+          break
+        if hitnumber == 4:
+          ai1card6 = random.choice(cards)
+          time.sleep(1)
+          print("AI 1's sixth card is " + str(ai1card6))
+          hitnumber = hitnumber + 1
+          break
+        if hitnumber == 5:
+          ai1card7 = random.choice(cards)
+          time.sleep(1)
+          print("AI 1's seventh card is " + str(ai1card7))
+          hitnumber = hitnumber + 1
+          break
+        if hitnumber == 6:
+          ai1card8 = random.choice(cards)
+          time.sleep(1)
+          print("AI 1's eighth card is " + str(ai1card8))
+          hitnumber = hitnumber + 1
+          break
+  #end of npc 1 loop
+          
+  #start of npc 2 loop
+  ai2card1 = random.choice(cards)
+  ai2card2 = random.choice(cards)
+
+  
+  if numberofplayers > 1:
+    ai2bet = random.choice(bets)
+    print("AI 2 has " + str(ai2money) + " dollars")
+    if ai2money > 0:
+      print("AI 2 bets " + str(ai2bet))
+      print("AI 2's cards are " + str(ai2card1) +  ", " + str(ai2card2))
+    else:
+      print("AI 2 is dragged from the room as they were playing with money from a loan shark, you hear faint screaming in the distance, AI 2 is never heard from again")
+      break
+    hitnumber = 1
+    while True:
+      if ai2card1 in ("Jack", "Queen", "King", "A"):
+        if ai2card1 == "Jack" or ai2card1 == "Queen" or ai2card1 == "King":
+          ai2card1 = 10
+        if ai2card1 == "A":
+          if ai2total > 21:
+            ai2card1 = 1
+          else:
+            ai2card1 = 11
+        
+      if ai2card2 in ("Jack", "Queen", "King", "A"):
+        if ai2card2 == "Jack" or ai2card2 == "Queen" or ai2card2 == "King":
+          ai2card2 = 10
+        if ai2card2 == "A":
+          if ai2total > 21:
+            ai2card2 = 1
+          else:
+            ai2card2 = 11
+    
+      if ai2card3 in ("Jack", "Queen", "King", "A"):
+        if ai2card3 == "Jack" or ai2card3 == "Queen" or ai2card3 == "King":
+          ai2card3 = 10
+        if ai2card3 == "A":
+          if ai2total > 21:
+            ai2card3 = 1
+          else:
+            ai2card3 = 11
+          
+      if ai2card4 in ("Jack", "Queen", "King", "A"):
+        if ai2card4 == "Jack" or ai2card4 == "Queen" or ai2card4 == "King":
+          ai2card4 = 10
+        if ai2card4 == "A":
+          if ai2total > 10:
+            ai2card4 = 1
+          else:
+            ai2card4 = 11
+
+      if ai2card5 in ("Jack", "Queen", "King", "A"):
+        if ai2card5 == "Jack" or ai2card5 == "Queen" or ai2card5 == "King":
+          ai2card5 = 10
+        if ai2card5 == "A":
+          if ai2total > 10:
+            ai2card5 = 1
+          else:
+            ai2card5 = 11
+      if ai2card6 in ("Jack", "Queen", "King", "A"):
+        if ai2card6 == "Jack" or ai2card6 == "Queen" or ai2card6 == "King":
+          ai2card6 = 10
+        if ai2card6 == "A":
+          if ai2total > 10:
+            ai2card6 = 1
+          else:
+            ai2card6 = 11
+
+      if ai2card7 in ("Jack", "Queen", "King", "A"):
+        if ai2card7 == "Jack" or ai2card7 == "Queen" or ai2card7 == "King":
+          ai2card7 = 10
+        if ai2card7 == "A":
+          if ai2total > 10:
+            ai2card7 = 1
+          else:
+            ai2card7 = 11
+      if ai2card8 in ("Jack", "Queen", "King", "A"):
+        if ai2card8 == "Jack" or ai2card8 == "Queen" or ai2card8 == "King":
+          ai2card8 = 10
+        if ai2card8 == "A":
+          if ai2total > 10:
+            ai2card8 = 1
+          else:
+            ai2card8 = 11
+          
+      ai2total = ai2card1 + ai2card2 + ai2card3 + ai2card4 + ai2card5 + ai2card6 + ai2card7 + ai2card8
+
+      if ai2total > 21:
+        if ai2card1 == 11:
+          ai2card1 = 1
+        if ai2card2 == 11:
+          ai2card2 = 1
+        if ai2card3 == 11:
+          ai2card3 = 1
+        if ai2card4 == 11:
+          ai2card4 = 1
+        if ai2card5 == 11:
+          ai2card5 = 1
+        if ai2card6 == 11:
+          ai2card6 = 1
+        if ai2card7 == 11:
+          ai2card7 = 1
+        if ai2card8 == 11:
+          ai2card8 = 1
+        
+      ai2total = ai2card1 + ai2card2 + ai2card3 + ai2card4 + ai2card5 + ai2card6 + ai2card7 + ai2card8
+
+      time.sleep(3)
+      print("AI 2's total is: " + str(ai2total))
+
+      if ai2total == 21:
+        print("AI 2 has 21")
+        print("Next players turn")
+        print(" ")
+        break
+      if ai2total > 21:
+        print("AI 2 bust")
+        print("Next players turn")
+        print(" ")
+        break
+    
+      if ai2total > 18:
+        print("AI 2 stands")
+        print("AI 2's total is " + str(ai2total))
+        print("Next players turn")
+        print(" ")
+        break
+      time.sleep(1)
+      if ai2total < 19:
+        hitorstand = "H"
+        print("AI 2 hits")
+
+      while True:
+        if hitorstand == "H" or hitorstand == "h":
+          if hitnumber == 1:
+            ai2card3 = random.choice(cards)
+            time.sleep(1)
+            print("AI 2's third card is " + str(ai2card3))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 2:
+            ai2card4 = random.choice(cards)
+            time.sleep(1)
+            print("AI 2's fourth card is " + str(ai2card4))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 3:
+            ai2card5 = random.choice(cards)
+            time.sleep(1)
+            print("AI 2's fifth card is " + str(ai2card5))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 4:
+            ai2card6 = random.choice(cards)
+            time.sleep(1)
+            print("AI 2's sixth card is " + str(ai2card6))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 5:
+            ai2card7 = random.choice(cards)
+            time.sleep(1)
+            print("AI 2's seventh card is " + str(ai2card7))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 6:
+            ai2card8 = random.choice(cards)
+            time.sleep(1)
+            print("AI 2's eighth card is " + str(ai2card8))
+            hitnumber = hitnumber + 1
+            break
+  #end of npc 2 loop
+
+  #start of npc 3 loop
+  ai3card1 = random.choice(cards)
+  ai3card2 = random.choice(cards)
+
+  
+  if numberofplayers > 2:
+    ai3bet = random.choice(bets)
+    print("AI 3 has " + str(ai3money) + " dollars")
+    if ai3money > 0:
+      print("AI 3 bets " + str(ai3bet))
+      print("AI 3's cards are " + str(ai3card1) +  ", " + str(ai3card2))
+    else:
+      print("AI 3 throws a beer bottle at the wall and it shatters, AI 3 is then dragged out of the room by the dealer of this backroom cardgame. ")
+      break
+    hitnumber = 1
+    while True:
+      if ai3card1 in ("Jack", "Queen", "King", "A"):
+        if ai3card1 == "Jack" or ai3card1 == "Queen" or ai3card1 == "King":
+          ai3card1 = 10
+        if ai3card1 == "A":
+          if ai3total > 21:
+            ai3card1 = 1
+          else:
+            ai3card1 = 11
+        
+      if ai3card2 in ("Jack", "Queen", "King", "A"):
+        if ai3card2 == "Jack" or ai3card2 == "Queen" or ai3card2 == "King":
+          ai3card2 = 10
+        if ai3card2 == "A":
+          if ai3total > 21:
+            ai3card2 = 1
+          else:
+            ai3card2 = 11
+    
+      if ai3card3 in ("Jack", "Queen", "King", "A"):
+        if ai3card3 == "Jack" or ai3card3 == "Queen" or ai3card3 == "King":
+          ai3card3 = 10
+        if ai3card3 == "A":
+          if ai3total > 21:
+            ai3card3 = 1
+          else:
+            ai3card3 = 11
+          
+      if ai3card4 in ("Jack", "Queen", "King", "A"):
+        if ai3card4 == "Jack" or ai3card4 == "Queen" or ai3card4 == "King":
+          ai3card4 = 10
+        if ai3card4 == "A":
+          if ai3total > 10:
+            ai3card4 = 1
+          else:
+            ai3card4 = 11
+
+      if ai3card5 in ("Jack", "Queen", "King", "A"):
+        if ai3card5 == "Jack" or ai3card5 == "Queen" or ai3card5 == "King":
+          ai3card5 = 10
+        if ai3card5 == "A":
+          if ai3total > 10:
+            ai3card5 = 1
+          else:
+            ai3card5 = 11
+      if ai3card6 in ("Jack", "Queen", "King", "A"):
+        if ai3card6 == "Jack" or ai3card6 == "Queen" or ai3card6 == "King":
+          ai3card6 = 10
+        if ai3card6 == "A":
+          if ai3total > 10:
+            ai3card6 = 1
+          else:
+            ai3card6 = 11
+
+      if ai3card7 in ("Jack", "Queen", "King", "A"):
+        if ai3card7 == "Jack" or ai3card7 == "Queen" or ai3card7 == "King":
+          ai3card7 = 10
+        if ai3card7 == "A":
+          if ai3total > 10:
+            ai3card7 = 1
+          else:
+            ai3card7 = 11
+      if ai3card8 in ("Jack", "Queen", "King", "A"):
+        if ai3card8 == "Jack" or ai3card8 == "Queen" or ai3card8 == "King":
+          ai3card8 = 10
+        if ai3card8 == "A":
+          if ai3total > 10:
+            ai3card8 = 1
+          else:
+            ai3card8 = 11
+          
+      ai3total = ai3card1 + ai3card2 + ai3card3 + ai3card4 + ai3card5 + ai3card6 + ai3card7 + ai3card8
+
+      if ai3total > 21:
+        if ai3card1 == 11:
+          ai3card1 = 1
+        if ai3card2 == 11:
+          ai3card2 = 1
+        if ai3card3 == 11:
+          ai3card3 = 1
+        if ai3card4 == 11:
+          ai3card4 = 1
+        if ai3card5 == 11:
+          ai3card5 = 1
+        if ai3card6 == 11:
+          ai3card6 = 1
+        if ai3card7 == 11:
+          ai3card7 = 1
+        if ai3card8 == 11:
+          ai3card8 = 1
+        
+      ai3total = ai3card1 + ai3card2 + ai3card3 + ai3card4 + ai3card5 + ai3card6 + ai3card7 + ai3card8
+
+      time.sleep(3)
+      print("AI 3's total is: " + str(ai3total))
+
+      if ai3total == 21:
+        print("AI 3 has 21")
+        print("Next players turn")
+        print(" ")
+        break
+      if ai3total > 21:
+        print("AI 3 bust")
+        print("Next players turn")
+        print(" ")
+        break
+    
+      if ai3total > 15:
+        print("AI 3 stands")
+        print("AI 3's total is " + str(ai3total))
+        print("Next players turn")
+        print(" ")
+        break
+      time.sleep(1)
+      if ai3total < 16:
+        hitorstand = "H"
+        print("AI 3 hits")
+
+      while True:
+        if hitorstand == "H" or hitorstand == "h":
+          if hitnumber == 1:
+            ai3card3 = random.choice(cards)
+            time.sleep(1)
+            print("AI 3's third card is " + str(ai3card3))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 2:
+            ai3card4 = random.choice(cards)
+            time.sleep(1)
+            print("AI 3's fourth card is " + str(ai3card4))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 3:
+            ai3card5 = random.choice(cards)
+            time.sleep(1)
+            print("AI 3's fifth card is " + str(ai3card5))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 4:
+            ai3card6 = random.choice(cards)
+            time.sleep(1)
+            print("AI 3's sixth card is " + str(ai3card6))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 5:
+            ai3card7 = random.choice(cards)
+            time.sleep(1)
+            print("AI 3's seventh card is " + str(ai3card7))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 6:
+            ai3card8 = random.choice(cards)
+            time.sleep(1)
+            print("AI 3's eighth card is " + str(ai3card8))
+            hitnumber = hitnumber + 1
+            break
+  #end of npc 3 loop
+
+  #start of npc 4 loop
+  ai4card1 = random.choice(cards)
+  ai4card2 = random.choice(cards)
+
+  
+  if numberofplayers > 3:
+    ai4bet = random.choice(bets)
+    print("AI 4 has " + str(ai4money) + " dollars")
+    if ai4money > 0:
+      print("AI 4 bets " + str(ai4bet))
+      print("AI 4's cards are " + str(ai4card1) +  ", " + str(ai4card2))
+    else:
+      print("AI 4 quietly stands up and slowly walks out of the room, later that day you see a string of store robberies on the news, with a suspect that looks oddly similar to AI 4")
+      break
+    hitnumber = 1
+    while True:
+      if ai4card1 in ("Jack", "Queen", "King", "A"):
+        if ai4card1 == "Jack" or ai4card1 == "Queen" or ai4card1 == "King":
+          ai4card1 = 10
+        if ai4card1 == "A":
+          if ai4total > 21:
+            ai4card1 = 1
+          else:
+            ai4card1 = 11
+        
+      if ai4card2 in ("Jack", "Queen", "King", "A"):
+        if ai4card2 == "Jack" or ai4card2 == "Queen" or ai4card2 == "King":
+          ai4card2 = 10
+        if ai4card2 == "A":
+          if ai4total > 21:
+            ai4card2 = 1
+          else:
+            ai4card2 = 11
+    
+      if ai4card3 in ("Jack", "Queen", "King", "A"):
+        if ai4card3 == "Jack" or ai4card3 == "Queen" or ai4card3 == "King":
+          ai4card3 = 10
+        if ai4card3 == "A":
+          if ai4total > 21:
+            ai4card3 = 1
+          else:
+            ai4card3 = 11
+          
+      if ai4card4 in ("Jack", "Queen", "King", "A"):
+        if ai4card4 == "Jack" or ai4card4 == "Queen" or ai4card4 == "King":
+          ai4card4 = 10
+        if ai4card4 == "A":
+          if ai4total > 10:
+            ai4card4 = 1
+          else:
+            ai4card4 = 11
+
+      if ai4card5 in ("Jack", "Queen", "King", "A"):
+        if ai4card5 == "Jack" or ai4card5 == "Queen" or ai4card5 == "King":
+          ai4card5 = 10
+        if ai4card5 == "A":
+          if ai4total > 10:
+            ai4card5 = 1
+          else:
+            ai4card5 = 11
+      if ai4card6 in ("Jack", "Queen", "King", "A"):
+        if ai4card6 == "Jack" or ai4card6 == "Queen" or ai4card6 == "King":
+          ai4card6 = 10
+        if ai4card6 == "A":
+          if ai4total > 10:
+            ai4card6 = 1
+          else:
+            ai4card6 = 11
+
+      if ai4card7 in ("Jack", "Queen", "King", "A"):
+        if ai4card7 == "Jack" or ai4card7 == "Queen" or ai4card7 == "King":
+          ai4card7 = 10
+        if ai4card7 == "A":
+          if ai4total > 10:
+            ai4card7 = 1
+          else:
+            ai4card7 = 11
+      if ai4card8 in ("Jack", "Queen", "King", "A"):
+        if ai4card8 == "Jack" or ai4card8 == "Queen" or ai4card8 == "King":
+          ai4card8 = 10
+        if ai4card8 == "A":
+          if ai4total > 10:
+            ai4card8 = 1
+          else:
+            ai4card8 = 11
+          
+      ai4total = ai4card1 + ai4card2 + ai4card3 + ai4card4 + ai4card5 + ai4card6 + ai4card7 + ai4card8
+
+      if ai4total > 21:
+        if ai4card1 == 11:
+          ai4card1 = 1
+        if ai4card2 == 11:
+          ai4card2 = 1
+        if ai4card3 == 11:
+          ai4card3 = 1
+        if ai4card4 == 11:
+          ai4card4 = 1
+        if ai4card5 == 11:
+          ai4card5 = 1
+        if ai4card6 == 11:
+          ai4card6 = 1
+        if ai4card7 == 11:
+          ai4card7 = 1
+        if ai4card8 == 11:
+          ai4card8 = 1
+        
+      ai4total = ai4card1 + ai4card2 + ai4card3 + ai4card4 + ai4card5 + ai4card6 + ai4card7 + ai4card8
+
+      time.sleep(3)
+      print("AI 4's total is: " + str(ai4total))
+
+      if ai4total == 21:
+        print("AI 4 has 21")
+        print("Next players turn")
+        break
+      if ai4total > 21:
+        print("AI 4 bust")
+        print("Next players turn")
+        break
+    
+      if ai4total > 13:
+        print("AI 4 stands")
+        print("AI 4's total is " + str(ai4total))
+        print("Next players turn")
+        break
+      time.sleep(1)
+      if ai4total < 14:
+        hitorstand = "H"
+        print("AI 4 hits")
+
+      while True:
+        if hitorstand == "H" or hitorstand == "h":
+          if hitnumber == 1:
+            ai4card3 = random.choice(cards)
+            time.sleep(1)
+            print("AI 4's third card is " + str(ai4card3))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 2:
+            ai4card4 = random.choice(cards)
+            time.sleep(1)
+            print("AI 4's fourth card is " + str(ai4card4))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 3:
+            ai4card5 = random.choice(cards)
+            time.sleep(1)
+            print("AI 4's fifth card is " + str(ai4card5))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 4:
+            ai4card6 = random.choice(cards)
+            time.sleep(1)
+            print("AI 4's sixth card is " + str(ai4card6))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 5:
+            ai4card7 = random.choice(cards)
+            time.sleep(1)
+            print("AI 4's seventh card is " + str(ai4card7))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 6:
+            ai4card8 = random.choice(cards)
+            time.sleep(1)
+            print("AI 4's eighth card is " + str(ai4card8))
+            hitnumber = hitnumber + 1
+            break
+  #end of npc 4 loop
+
+  #start of dealer loop
+  dealercard1 = random.choice(cards)
+  dealercard2 = random.choice(cards)
+
+  
+  if numberofplayers > 0:
+    print(" ")
+    print("dealers turn...")
+    print("dealer's cards are " + str(dealercard1) +  ", " + str(dealercard2))
+    hitnumber = 1
+    while True:
+      if dealercard1 in ("Jack", "Queen", "King", "A"):
+        if dealercard1 == "Jack" or dealercard1 == "Queen" or dealercard1 == "King":
+          dealercard1 = 10
+        if dealercard1 == "A":
+          if dealertotal > 21:
+            dealercard1 = 1
+          else:
+            dealercard1 = 11
+        
+      if dealercard2 in ("Jack", "Queen", "King", "A"):
+        if dealercard2 == "Jack" or dealercard2 == "Queen" or dealercard2 == "King":
+          dealercard2 = 10
+        if dealercard2 == "A":
+          if dealertotal > 21:
+            dealercard2 = 1
+          else:
+            dealercard2 = 11
+    
+      if dealercard3 in ("Jack", "Queen", "King", "A"):
+        if dealercard3 == "Jack" or dealercard3 == "Queen" or dealercard3 == "King":
+          dealercard3 = 10
+        if dealercard3 == "A":
+          if dealertotal > 21:
+            dealercard3 = 1
+          else:
+            dealercard3 = 11
+          
+      if dealercard4 in ("Jack", "Queen", "King", "A"):
+        if dealercard4 == "Jack" or dealercard4 == "Queen" or dealercard4 == "King":
+          dealercard4 = 10
+        if dealercard4 == "A":
+          if dealertotal > 10:
+            dealercard4 = 1
+          else:
+            dealercard4 = 11
+
+      if dealercard5 in ("Jack", "Queen", "King", "A"):
+        if dealercard5 == "Jack" or dealercard5 == "Queen" or dealercard5 == "King":
+          dealercard5 = 10
+        if dealercard5 == "A":
+          if dealertotal > 10:
+            dealercard5 = 1
+          else:
+            dealercard5 = 11
+      if dealercard6 in ("Jack", "Queen", "King", "A"):
+        if dealercard6 == "Jack" or dealercard6 == "Queen" or dealercard6 == "King":
+          dealercard6 = 10
+        if dealercard6 == "A":
+          if dealertotal > 10:
+            dealercard6 = 1
+          else:
+            dealercard6 = 11
+
+      if dealercard7 in ("Jack", "Queen", "King", "A"):
+        if dealercard7 == "Jack" or dealercard7 == "Queen" or dealercard7 == "King":
+          dealercard7 = 10
+        if dealercard7 == "A":
+          if dealertotal > 10:
+            dealercard7 = 1
+          else:
+            dealercard7 = 11
+      if dealercard8 in ("Jack", "Queen", "King", "A"):
+        if dealercard8 == "Jack" or dealercard8 == "Queen" or dealercard8 == "King":
+          dealercard8 = 10
+        if dealercard8 == "A":
+          if dealertotal > 10:
+            dealercard8 = 1
+          else:
+            dealercard8 = 11
+          
+      dealertotal = dealercard1 + dealercard2 + dealercard3 + dealercard4 + dealercard5 + dealercard6 + dealercard7 + dealercard8
+
+      if dealertotal > 21:
+        if dealercard1 == 11:
+          dealercard1 = 1
+        if dealercard2 == 11:
+          dealercard2 = 1
+        if dealercard3 == 11:
+          dealercard3 = 1
+        if dealercard4 == 11:
+          dealercard4 = 1
+        if dealercard5 == 11:
+          dealercard5 = 1
+        if dealercard6 == 11:
+          dealercard6 = 1
+        if dealercard7 == 11:
+          dealercard7 = 1
+        if dealercard8 == 11:
+          dealercard8 = 1
+        
+      dealertotal = dealercard1 + dealercard2 + dealercard3 + dealercard4 + dealercard5 + dealercard6 + dealercard7 + dealercard8
+
+      time.sleep(3)
+      print("dealer's total is: " + str(dealertotal))
+
+      if dealertotal == 21:
+        print("dealer has 21")
+        break
+      if dealertotal > 21:
+        print("dealer bust")
+        break
+    
+      if dealertotal > 16:
+        print("dealer stands")
+        print("dealer's total is " + str(dealertotal))
+        break
+      time.sleep(1)
+      if dealertotal < 17:
+        hitorstand = "H"
+        print("dealer hits")
+
+      while True:
+        if hitorstand == "H" or hitorstand == "h":
+          if hitnumber == 1:
+            dealercard3 = random.choice(cards)
+            time.sleep(1)
+            print("dealer's third card is " + str(dealercard3))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 2:
+            dealercard4 = random.choice(cards)
+            time.sleep(1)
+            print("dealer's fourth card is " + str(dealercard4))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 3:
+            dealercard5 = random.choice(cards)
+            time.sleep(1)
+            print("dealer's fifth card is " + str(dealercard5))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 4:
+            dealercard6 = random.choice(cards)
+            time.sleep(1)
+            print("dealer's sixth card is " + str(dealercard6))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 5:
+            dealercard7 = random.choice(cards)
+            time.sleep(1)
+            print("dealer's seventh card is " + str(dealercard7))
+            hitnumber = hitnumber + 1
+            break
+          if hitnumber == 6:
+            dealercard8 = random.choice(cards)
+            time.sleep(1)
+            print("dealer's eighth card is " + str(dealercard8))
+            hitnumber = hitnumber + 1
+            break
+  #end of dealer loop
+
+  #scoring
+  print(" ")
+  print("Score recap:")
+  if playertotal > 21:
+    print("The player bust :(")
+    playermoney = playermoney - playerbet
+    print("The player lost " + str(playerbet) + " dollars")
+  if playertotal == 21:
+    print("The player got 21")
+    if dealertotal == 21:
+        print("But still lost")
+        playermoney = playermoney - playerbet
+        print("The player lost " + str(playerbet) + " dollars")
+    else:
+      playermoney = playermoney + playerbet
+      print("The player won " + str(playerbet) + " dollars")
+  if playertotal < 21:
+    print("The player stood with a total of " + str(playertotal))
+    if dealertotal < 22:
+      if playertotal > dealertotal:
+        print("And beat the dealer")
+        playermoney = playermoney + playerbet
+        print("The player won " + str(playerbet) + " dollars")
+      else:
+        print("But still lost to the dealer")
+        playermoney = playermoney - playerbet
+        print("The player lost " + str(playerbet) + " dollars")
+    else:
+      playermoney = playermoney + playerbet
+      print("The player won " + str(playerbet) + " dollars") 
+    
+  if numberofplayers > 0 :
+    if ai1total > 21:
+      print("AI 1 bust :(")
+      ai1money = ai1money - ai1bet
+      print("AI 1 lost " + str(ai1bet) + " dollars")
+    if ai1total == 21:
+      print("AI 1 got 21")
+      
+      if dealertotal == 21:
+        print("But still lost")
+        ai1money = ai1money - ai1bet
+        print("AI 1 lost " + str(ai1bet) + " dollars")
+      else:
+        ai1money = ai1money + ai1bet
+        print("AI 1 won " + str(ai1bet) + " dollars")
+    if ai1total < 21:
+      print("AI 1 stood with a total of " + str(ai1total))
+      if dealertotal < 22:
+        if ai1total > dealertotal:
+          print("And beat the dealer")
+          ai1money = ai1money + ai1bet
+          print("AI 1 won " + str(ai1bet) + " dollars")
+        else:
+          print("But still lost to the dealer")
+          ai1money = ai1money - ai1bet
+          print("AI 1 lost " + str(ai1bet) + " dollars")
+      else:
+        ai1money = ai1money + ai1bet
+        print("AI 1 won " + str(ai1bet) + " dollars")
+          
+  if numberofplayers > 1 :
+    if ai2total > 21:
+      print("AI 2 bust :(")
+      ai2money = ai2money - ai2bet
+      print("AI 2 lost " + str(ai2bet) + " dollars")
+    if ai2total == 21:
+      print("AI 2 got 21")
+      
+      if dealertotal == 21:
+        print("But still lost")
+        ai2money = ai2money - ai2bet
+        print("AI 2 lost " + str(ai2bet) + " dollars")
+      else:
+        ai2money = ai2money + ai2bet
+        print("AI 2 won " + str(ai2bet) + " dollars")
+    if ai2total < 21:
+      print("AI 2 stood with a total of " + str(ai2total))
+      if dealertotal < 22:
+        if ai2total > dealertotal:
+          print("And beat the dealer")
+          ai2money = ai2money + ai2bet
+          print("AI 2 won " + str(ai2bet) + " dollars")
+        else:
+          print("But still lost to the dealer")
+          ai2money = ai2money - ai2bet
+          print("AI 2 lost " + str(ai2bet) + " dollars")
+      else:
+        ai2money = ai2money + ai2bet
+        print("AI 2 won " + str(ai2bet) + " dollars")
+          
+  if numberofplayers > 2 :
+    if ai3total > 21:
+      print("AI 3 bust :(")
+      ai3money = ai3money - ai3bet
+      print("AI 3 lost " + str(ai3bet) + " dollars")
+    if ai3total == 21:
+      print("AI 3 got 21")
+      
+      if dealertotal == 21:
+        print("But still lost")
+        ai3money = ai3money - ai3bet
+        print("AI 3 lost " + str(ai3bet) + " dollars")
+      else:
+        ai3money = ai3money + ai3bet
+        print("AI 3 won " + str(ai3bet) + " dollars")
+    if ai3total < 21:
+      print("AI 3 stood with a total of " + str(ai3total))
+      if dealertotal < 22:
+        if ai3total > dealertotal:
+          print("And beat the dealer")
+          ai3money = ai3money + ai3bet
+          print("AI 3 won " + str(ai3bet) + " dollars")
+        else:
+          print("But still lost to the dealer")
+          ai3money = ai3money - ai3bet
+          print("AI 3 lost " + str(ai3bet) + " dollars")
+      else:
+        ai3money = ai3money + ai3bet
+        print("AI 3 won " + str(ai3bet) + " dollars")
+          
+  if numberofplayers > 3 :
+    if ai4total > 21:
+      print("AI 4 bust :(")
+      ai4money = ai4money - ai4bet
+      print("AI 4 lost " + str(ai4bet) + " dollars")
+    if ai4total == 21:
+      print("AI 4 got 21")
+      
+      if dealertotal == 21:
+        print("But still lost")
+        ai4money = ai4money - ai4bet
+        print("AI 4 lost " + str(ai4bet) + " dollars")
+      else:
+        ai4money = ai4money + ai4bet
+        print("AI 4 won " + str(ai4bet) + " dollars")
+    if ai4total < 21:
+      print("AI 4 stood with a total of " + str(ai4total))
+      if dealertotal < 22:
+        if ai4total > dealertotal:
+          print("And beat the dealer")
+          ai4money = ai4money + ai4bet
+          print("AI 4 won " + str(ai4bet) + " dollars")
+        else:
+          print("But still lost to the dealer")
+          ai4money = ai4money - ai4bet
+          print("AI 4 lost " + str(ai4bet) + " dollars")
+      else:
+        ai4money = ai4money + ai4bet
+        print("AI 4 won " + str(ai4bet) + " dollars")
+
+  if dealertotal > 21:
+    print("Dealer bust")
+    print("Any player that didn't bust wins")
+  if dealertotal == 21:
+    print("Dealer got 21")
+    print("all players lose")
+  if dealertotal < 21:
+    print("Dealer stood with a total of " + str(dealertotal))
+
+  if playermoney == 0 or playermoney < 0:
+    print("You ran out of money.....")
+    print("You needed that money for rent and food")
+    print("You starve and die")
+    break
+  # play again loop
+  while True:
+    decision = input("do you want to play another round? yes or no ")
+    if decision in ("yes", "no"):
+      break
+    print("invalid answer")
+  if decision == "yes":
+    continue
+  if decision == "no":
+    print("You leave the table with " + str(playermoney)+ " dollars")
+    break
